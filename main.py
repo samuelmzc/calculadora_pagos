@@ -31,7 +31,7 @@ if __name__ == "__main__":
     df["HORAS"] = df.apply(lambda fila: c.calculo_horas(fila["ENTRADA"], fila["SALIDA"], fila["SALIDA REAL"])[0], axis = 1)
     df["HORAS EXTRA"] = df.apply(lambda fila: c.calculo_horas(fila["ENTRADA"], fila["SALIDA"], fila["SALIDA REAL"])[1], axis = 1)
     df["HORAS TUPLA"] = df.apply(lambda fila: c.calculo_horas(fila["ENTRADA"], fila["SALIDA"], fila["SALIDA REAL"]), axis = 1)
-    df["PAGO"] = df.apply(lambda fila: c.calculo_pago(fila["HORAS TUPLA"], args.salario, args.salarioext), axis = 1)
+    df["PAGO"] = df.apply(lambda fila: c.calculo_pago(fila["HORAS TUPLA"], salario, salarioext), axis = 1)
 
     # Hacemos la suma de las distintas columnas
     horas_total = df["HORAS"].sum()
@@ -41,6 +41,10 @@ if __name__ == "__main__":
     # Solución estética para que no aparezca .0 si el número al final es entero
     pago_total = int(pago_total) if pago_total - int(pago_total) == 0 else pago_total
 
-    # Print final
-    print(f"Este mes va a cobrar {pago_total}€ brutos, con un total de {horas_total + horasext_total} horas trabajadas, de las cuales {horasext_total} fueron preventorias.")
+    # Enseñamos la ventana final
+    ventana_enseñar = tks.window_enseñar(
+        horas = horas_total,
+        horas_ext = horasext_total,
+        pago = pago_total
+    )
 

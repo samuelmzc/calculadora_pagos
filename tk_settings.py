@@ -39,8 +39,8 @@ def extraer(
     Comando que ejecuta el botón
     """
     resultados["Raíz"] = entrada_raiz.get()
-    resultados["Salario"] = entrada_sal.get()
-    resultados["Salario Extra"] = entrada_salext.get()
+    resultados["Salario"] = float(entrada_sal.get())
+    resultados["Salario Extra"] = float(entrada_salext.get())
     window.destroy()
 
 def window_obtener(
@@ -102,4 +102,31 @@ def window_obtener(
 
     window.mainloop()
     return (resultados_boton)
+
+def window_enseñar(
+        horas,
+        horas_ext,
+        pago,
+        colores = dicts("Colores"),
+        fuentes = dicts("Fuentes")
+):
+    # Creación de ventana
+    window = tk.Tk()
+    window.title("Cálculo de pago")
+    window.geometry("1000x500")
+    window.minsize(500, 250)
+    window.configure(bg = colores["Fondo"])
+
+    # Título
+    titulo = tk.Label(window, text = "Resultado")
+    titulo.config(fg = colores["Título"], bg = colores["Fondo"], font = fuentes["Subtítulo"], justify = "center")
+    titulo.pack(pady = (30, 10))
+
+    # Resultados
+    subtitulo = tk.Label(window, text = f"Este mes va a cobrar {pago}€ brutos, con un total de {horas + horas_ext} horas trabajadas, de las cuales {horas_ext} fueron preventorias.")
+    subtitulo.config(fg = colores["Subtítulo"], bg = colores["Fondo"], font = fuentes["Subtítulo"], justify = "left")
+    subtitulo.pack(fill = "both", pady = (0, 20))
+    subtitulo.bind("<Configure>", ajustar_texto)
+
+    window.mainloop()
 
