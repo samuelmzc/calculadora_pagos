@@ -1,4 +1,4 @@
-**Calculadora de pagos**
+ # **Calculadora de pagos**
 
 El objetivo de este repositorio reside en obtener el pago que se realizará según el número  de horas trabajadas. Se tienen en cuenta las horas extra, y los turnos partidos.
 
